@@ -1,4 +1,4 @@
-# VFinances
+# VFinances 💰💵💴💶💷💰
 
 Simple personal finance assistant web app, built with 💚 Vue.JS, Vuex, Vue Router, Bootstrap...
 

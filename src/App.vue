@@ -1,20 +1,18 @@
 <template>
-	<router-view />
+	<div>
+		<router-view />
+		<BaseSpinner />
+	</div>
 </template>
 
 <script>
+import BaseSpinner from './components/BaseSpinner'
+
 export default {
 	name: 'App',
+	components: {
+		BaseSpinner,
+	},
+	methods: {},
 }
 </script>
-
-<style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	outline-color: #000;
-}
-</style>

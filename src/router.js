@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Logon from '../pages/Logon'
+import Logon from './pages/Logon'
 
 Vue.use(Router)
 
