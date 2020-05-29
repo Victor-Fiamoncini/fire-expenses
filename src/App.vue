@@ -13,6 +13,9 @@ export default {
 	components: {
 		BaseSpinner,
 	},
-	methods: {},
+	mounted() {
+		console.log(this.$firebase)
+
+	}
 }
 </script>
