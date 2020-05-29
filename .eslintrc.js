@@ -9,9 +9,11 @@ module.exports = {
 		SharedArrayBuffer: 'readonly',
 		process: true,
 		__dirname: true,
+		module: true,
 	},
 	parserOptions: {
-		ecmaVersion: 2018,
+		parser: 'babel-eslint',
+		ecmaVersion: 2019,
 		sourceType: 'module',
 	},
 	plugins: ['vue'],

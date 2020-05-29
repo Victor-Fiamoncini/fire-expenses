@@ -2,7 +2,14 @@
 @import 'variables';
 
 * {
-  font-family: 'Avenir', 'Poppins', sans-serif;
+	font-family: 'Avenir', 'Poppins', sans-serif;
+}
+
+input {
+	box-shadow: none !important;
+	&:focus {
+		border-color: $featured;
+	}
 }
 
 .btn,
