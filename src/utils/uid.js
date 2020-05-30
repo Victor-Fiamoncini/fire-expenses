@@ -1,8 +1,6 @@
 export const setUid = (uid) => {
 	if (uid) {
 		localStorage.setItem('uid', uid)
-	} else {
-		localStorage.removeItem('uid')
 	}
 }
 

@@ -1,7 +1,15 @@
 <template>
 	<div id="root">
-		<BaseSpinner />
-		<router-view />
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-3" v-if="uid">
+					<Sidebar />
+				</div>
+				<div class="col">
+					<router-view />
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -9,21 +17,16 @@
 import '@fortawesome/fontawesome-free/css/all.css'
 import 'bootstrap/dist/css/bootstrap.css'
 
-import BaseSpinner from './components/BaseSpinner'
+import { mapGetters } from 'vuex'
+import Sidebar from './components/Sidebar'
 
 export default {
 	name: 'App',
 	components: {
-		BaseSpinner,
+		Sidebar,
 	},
-	mounted() {
-		// this.$firebase.auth().onAuthStateChanged(user => {
-		// 	localStorage.setItem('uid', user ? user.uid : null)
-
-		// 	setTimeout(() => {
-		// 		this.$root.$emit('Spinner::hide')
-		// 	}, 300)
-		// })
+	computed: {
+		...mapGetters('auth', ['uid'])
 	},
 }
 </script>

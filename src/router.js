@@ -26,7 +26,7 @@ const router = new Router({
 router.beforeEach(async (to, from, next) => {
 	document.title = `VFinances - ${to.name}`
 
-	await store.dispatch('auth/actionCheckUid')
+	store.dispatch('auth/actionCheckUid')
 	const hasUid = store.getters['auth/uid']
 
 	if (to.matched.some((record) => record.meta.requiresAuth)) {

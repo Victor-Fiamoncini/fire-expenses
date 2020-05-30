@@ -4,34 +4,27 @@ import * as uid from '../../../utils/uid'
 
 import AuthTypes from './types'
 
-export async function actionLogon({ commit }, { email, password }) {
+export async function actionLogon({ commit, dispatch }, payload) {
 	commit(AuthTypes.SET_LOADING, true)
+	const { email, password } = payload
 
 	try {
 		const res = await firebase
 			.auth()
 			.signInWithEmailAndPassword(email, password)
 
-		uid.setUid(res.user.uid)
-
+		dispatch('actionSetUid', res.user.uid)
 		commit(AuthTypes.SET_LOADING, false)
 
 		router.push({ name: 'Home' })
 	} catch (err) {
-		console.log(err)
-		uid.destroyUid()
+		dispatch('actionUnsetSession')
 	}
 }
 
-export function actionCheckUid({ dispatch, state }) {
-	if (state.uid) {
-		return state.uid
-	}
-
+export function actionCheckUid({ dispatch }) {
 	if (!uid.getUid()) {
 		dispatch('actionUnsetSession')
-
-		return false
 	}
 
 	dispatch('actionSetUid', uid.getUid())
@@ -42,6 +35,11 @@ export function actionSetUid({ commit }, payload) {
 	commit(AuthTypes.SET_UID, payload)
 }
 
-export function actionUnsetSession() {
+export async function actionUnsetSession({ commit }) {
+	await firebase.auth().signOut()
+
 	uid.destroyUid()
+	commit(AuthTypes.SET_UID, '')
+
+	router.push({ name: 'Logon' })
 }
