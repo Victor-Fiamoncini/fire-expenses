@@ -36,10 +36,13 @@ export function actionSetUid({ commit }, payload) {
 }
 
 export async function actionUnsetSession({ commit }) {
-	await firebase.auth().signOut()
-
 	uid.destroyUid()
 	commit(AuthTypes.SET_UID, '')
+	commit(AuthTypes.SET_USER, {})
+	commit(AuthTypes.SET_ERRORS, [])
+	commit(AuthTypes.SET_LOADING, false)
+
+	await firebase.auth().signOut()
 
 	router.push({ name: 'Logon' })
 }

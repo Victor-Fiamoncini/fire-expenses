@@ -1,15 +1,14 @@
 <template>
 	<div id="root">
-		<div class="container-fluid">
+		<div class="container-fluid" v-if="uid">
 			<div class="row">
-				<div class="col-3" v-if="uid">
-					<Sidebar />
-				</div>
+				<Sidebar />
 				<div class="col">
 					<router-view />
 				</div>
 			</div>
 		</div>
+		<router-view v-else />
 	</div>
 </template>
 
@@ -26,7 +25,7 @@ export default {
 		Sidebar,
 	},
 	computed: {
-		...mapGetters('auth', ['uid'])
+		...mapGetters('auth', ['uid']),
 	},
 }
 </script>

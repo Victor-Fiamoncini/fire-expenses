@@ -13,11 +13,19 @@ const router = new Router({
 			component: () => import('./pages/Logon'),
 		},
 		{
-			path: '/dashboard',
+			path: '/painel',
 			name: 'Home',
 			component: () => import('./pages/Home'),
 			meta: {
-				requiresAuth: true,
+				auth: true,
+			},
+		},
+		{
+			path: '/lista-gastos',
+			name: 'Gastos',
+			component: () => import('./pages/ExpenseList'),
+			meta: {
+				auth: true,
 			},
 		},
 	],
@@ -29,15 +37,15 @@ router.beforeEach(async (to, from, next) => {
 	store.dispatch('auth/actionCheckUid')
 	const hasUid = store.getters['auth/uid']
 
-	if (to.matched.some((record) => record.meta.requiresAuth)) {
+	if (to.matched.some((record) => record.meta.auth)) {
 		if (hasUid) {
-			next()
+			return next()
 		} else {
 			next({ name: 'Logon' })
 		}
 	} else {
 		if (hasUid) {
-			next({ name: 'Home' })
+			return next({ name: 'Home' })
 		} else {
 			next()
 		}
