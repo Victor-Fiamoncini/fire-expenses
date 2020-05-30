@@ -1,9 +1,11 @@
 <template>
 	<form v-on:submit.prevent="doLogon">
-		<div class="card">
-			<h1>VFinances</h1>
-			<div class="card-body">
-				<div class="form-group">
+		<b-card class="card">
+			<h1>
+				Fire Expenses	<font-awesome-icon icon="dollar-sign" />
+			</h1>
+			<b-card-body>
+				<b-form-group>
 					<input
 						type="email"
 						class="form-control"
@@ -11,8 +13,8 @@
 						required
 						v-model="form.email"
 					/>
-				</div>
-				<div class="form-group">
+				</b-form-group>
+				<b-form-group>
 					<input
 						type="password"
 						class="form-control"
@@ -20,19 +22,24 @@
 						required
 						v-model="form.password"
 					/>
-				</div>
-				<button class="btn btn-primary btn-block" v-bind:disabled="loading">
+				</b-form-group>
+				<b-button
+					block
+					variant="primary"
+					v-bind:disabled="loading"
+					v-on:click.prevent="doLogon"
+				>
 					<template v-if="loading">
-						<i class="fa fa-spinner fa-spin"></i>
+						<font-awesome-icon icon="spinner" class="fa-spin" />
 						Entrando...
 					</template>
 					<template v-else>
-						<i class="fa fa-sign-in-alt"></i>
+						<font-awesome-icon icon="sign-in-alt" />
 						Entrar
 					</template>
-				</button>
-			</div>
-		</div>
+				</b-button>
+			</b-card-body>
+		</b-card>
 	</form>
 </template>
 
@@ -68,6 +75,11 @@ form {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+	h1 {
+		svg {
+			color: $featured;
+		}
+	}
 	.card {
 		width: 40%;
 		padding-top: 18px;

@@ -3,10 +3,18 @@
 
 * {
 	font-family: 'Avenir', 'Poppins', sans-serif;
+	outline-color: $featured;
 }
 
-input {
+body {
+	line-height: 1.4;
+}
+
+input,
+button,
+textarea {
 	box-shadow: none !important;
+	border-color: transparent;
 	&:focus {
 		border-color: $featured;
 	}

@@ -1,21 +1,18 @@
 <template>
 	<div id="root">
-		<div class="container-fluid" v-if="uid">
-			<div class="row">
+		<b-container fluid v-if="uid">
+			<b-row>
 				<Sidebar />
-				<div class="col">
+				<b-col>
 					<router-view />
-				</div>
-			</div>
-		</div>
+				</b-col>
+			</b-row>
+		</b-container>
 		<router-view v-else />
 	</div>
 </template>
 
 <script>
-import '@fortawesome/fontawesome-free/css/all.css'
-import 'bootstrap/dist/css/bootstrap.css'
-
 import { mapGetters } from 'vuex'
 import Sidebar from './components/Sidebar'
 

@@ -11,6 +11,9 @@ const router = new Router({
 			path: '/',
 			name: 'Logon',
 			component: () => import('./pages/Logon'),
+			meta: {
+				title: 'Logon',
+			},
 		},
 		{
 			path: '/painel',
@@ -18,6 +21,8 @@ const router = new Router({
 			component: () => import('./pages/Home'),
 			meta: {
 				auth: true,
+				icon: 'home',
+				title: 'Home',
 			},
 		},
 		{
@@ -26,13 +31,15 @@ const router = new Router({
 			component: () => import('./pages/ExpenseList'),
 			meta: {
 				auth: true,
+				icon: 'list',
+				title: 'Lista de Dispesas',
 			},
 		},
 	],
 })
 
 router.beforeEach(async (to, from, next) => {
-	document.title = `VFinances - ${to.name}`
+	document.title = `${to.meta.title} - Fire Expenses`
 
 	store.dispatch('auth/actionCheckUid')
 	const hasUid = store.getters['auth/uid']
