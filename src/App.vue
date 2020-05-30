@@ -1,9 +1,7 @@
 <template>
 	<div id="root">
 		<BaseSpinner />
-		<div class="container">
-			<router-view />
-		</div>
+		<router-view />
 	</div>
 </template>
 
@@ -18,11 +16,20 @@ export default {
 	components: {
 		BaseSpinner,
 	},
+	mounted() {
+		// this.$firebase.auth().onAuthStateChanged(user => {
+		// 	localStorage.setItem('uid', user ? user.uid : null)
+
+		// 	setTimeout(() => {
+		// 		this.$root.$emit('Spinner::hide')
+		// 	}, 300)
+		// })
+	},
 }
 </script>
 
 <style lang="scss">
-@import './assets/scss/app.scss';
+@import './assets/scss/app';
 
 #root {
 	min-height: 100vh;

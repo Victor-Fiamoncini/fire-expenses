@@ -11,8 +11,8 @@ export default {
 		visible: false,
 	}),
 	created() {
-		this.$root.$on('Spinner::show', this.toggleSpinner)
-		this.$root.$on('Spinner::hide', this.toggleSpinner)
+		this.$root.$on('Spinner::show', () => this.visible = true)
+		this.$root.$on('Spinner::hide', () => this.visible = false)
 	},
 	methods: {
 		toggleSpinner() {

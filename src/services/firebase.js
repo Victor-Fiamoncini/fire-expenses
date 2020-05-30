@@ -13,7 +13,7 @@ const {
 	VUE_APP_FIREBASE_APP_ID,
 } = process.env
 
-export const firebaseApp = firebase.initializeApp({
+export default firebase.initializeApp({
 	apiKey: VUE_APP_FIREBASE_WEB_API_KEY,
 	authDomain: VUE_APP_FIREBASE_AUTH_DOMAIN,
 	databaseURL: VUE_APP_FIREBASE_DATABASE_URL,
@@ -22,11 +22,3 @@ export const firebaseApp = firebase.initializeApp({
 	messagingSenderId: VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
 	appId: VUE_APP_FIREBASE_APP_ID,
 })
-
-export default function install(Vue) {
-	Object.defineProperty(Vue.prototype, '$firebase', {
-		get() {
-			return firebaseApp
-		},
-	})
-}
