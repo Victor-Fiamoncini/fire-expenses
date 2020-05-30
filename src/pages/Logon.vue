@@ -6,20 +6,20 @@
 			</h1>
 			<b-card-body>
 				<b-form-group>
-					<input
+					<b-form-input
 						type="email"
-						class="form-control"
-						placeholder="E-mail"
+						trim
 						required
+						placeholder="E-mail"
 						v-model="form.email"
 					/>
 				</b-form-group>
 				<b-form-group>
-					<input
+					<b-form-input
 						type="password"
-						class="form-control"
-						placeholder="Senha"
+						trim
 						required
+						placeholder="Senha"
 						v-model="form.password"
 					/>
 				</b-form-group>
