@@ -1,14 +1,16 @@
 import { randomBytes } from 'crypto'
 import firebase from '../../../services/firebase'
-import store from '../../index'
+import store from '../../'
 import * as uid from '../../../utils/uid'
 
 import ExpenseTypes from './types'
 
 export async function actionStoreExpense({ commit }, payload) {
+	commit(ExpenseTypes.SET_LOADING, true)
+	let url = ''
+
 	try {
-		let url = ''
-		const database = firebase.datasbase().ref(uid.getUid())
+		const database = firebase.database().ref(uid.getUid())
 		const id = database.push().key
 
 		if (payload.receipt) {
@@ -28,16 +30,38 @@ export async function actionStoreExpense({ commit }, payload) {
 			receipt: url,
 		}
 
-		await database.child(id).set(newExpense, (err) => {
-			if (err) {
-				console.log(err)
-			}
+		await database.child(id).set(newExpense)
 
-			commit(ExpenseTypes.SET_EXPENSE, newExpense)
+		commit(ExpenseTypes.SET_EXPENSE, newExpense)
+		commit(ExpenseTypes.SET_LOADING, false)
+
+		store.dispatch('message/actionSetMessage', {
+			text: 'Despesa cadastrada com sucesso',
+			type: 'success',
+		})
+
+		return true
+	} catch (err) {
+		store.dispatch('message/actionSetMessage', {
+			text: 'Erro ao cadastrar despesa',
+			type: 'danger',
+		})
+	}
+}
+
+export function actionIndexExpenses({ commit }) {
+	try {
+		const database = firebase.database().ref(uid.getUid())
+
+		database.on('value', (snapshot) => {
+			const values = snapshot.val()
+			const expenses = Object.keys(values).map((id) => values[id])
+
+			commit(ExpenseTypes.SET_EXPENSES, expenses)
 		})
 	} catch (err) {
 		store.dispatch('message/actionSetMessage', {
-			text: 'Erro ao cadastrar a despesa',
+			text: 'Erro ao obter as despesas',
 			type: 'danger',
 		})
 	}

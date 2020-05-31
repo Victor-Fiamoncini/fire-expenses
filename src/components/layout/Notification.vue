@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
 	name: 'Notification',
 	props: ['index', 'text', 'type'],
@@ -29,8 +27,6 @@ export default {
 		showDismissibleAlert: true,
 	}),
 	methods: {
-		...mapActions('message', ['actionRemoveMessage']),
-
 		countDownChanged(dismissCountDown) {
 			this.dismissCountDown = dismissCountDown
 		},

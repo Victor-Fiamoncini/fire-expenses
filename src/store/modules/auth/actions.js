@@ -1,5 +1,6 @@
 import firebase from '../../../services/firebase'
 import router from '../../../router'
+import store from '../../'
 import * as uid from '../../../utils/uid'
 
 import AuthTypes from './types'
@@ -18,6 +19,10 @@ export async function actionLogon({ commit, dispatch }, payload) {
 
 		router.push({ name: 'Home' })
 	} catch (err) {
+		store.dispatch('message/actionSetMessage', {
+			text: 'Credenciais inválidas',
+			type: 'danger',
+		})
 		dispatch('actionUnsetSession')
 	}
 }
@@ -40,7 +45,6 @@ export async function actionUnsetSession({ commit }) {
 
 	commit(AuthTypes.REMOVE_UID)
 	commit(AuthTypes.REMOVE_USER)
-	commit(AuthTypes.REMOVE_MESSAGE)
 	commit(AuthTypes.REMOVE_LOADING)
 
 	await firebase.auth().signOut()

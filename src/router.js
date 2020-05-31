@@ -10,7 +10,7 @@ const router = new Router({
 		{
 			path: '/',
 			name: 'Logon',
-			component: () => import('./pages/Logon'),
+			component: () => import('./components/pages/Logon'),
 			meta: {
 				requiresAuth: false,
 				title: 'Logon',
@@ -19,7 +19,7 @@ const router = new Router({
 		{
 			path: '/painel',
 			name: 'Home',
-			component: () => import('./pages/Home'),
+			component: () => import('./components/pages/Home'),
 			meta: {
 				icon: 'home',
 				requiresAuth: true,
@@ -29,7 +29,7 @@ const router = new Router({
 		{
 			path: '/painel/lista-gastos',
 			name: 'Gastos',
-			component: () => import('./pages/ExpenseList'),
+			component: () => import('./components/pages/ExpenseList'),
 			meta: {
 				icon: 'list',
 				requiresAuth: true,

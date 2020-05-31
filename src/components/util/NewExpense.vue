@@ -3,11 +3,10 @@
 		id="new-expense"
 		size="lg"
 		title="Cadastrar nova dispesa"
-		ok-title="Cadastrar dispesa"
-		v-on:ok.prevent="doOk"
+		hide-footer
 		v-model="show"
 	>
-		<b-form v-on:submit.stop.prevent="doStoreExpense">
+		<b-form v-on:submit.prevent="doStoreExpense">
 			<b-row>
 				<b-form-group class="col-8" label="Descrição" label-for="description">
 					<b-form-input
@@ -37,13 +36,33 @@
 						v-on:change="doInputFileHandle"
 					/>
 				</b-form-group>
+				<div class="modal-footer w-100 px-3 pb-0">
+					<b-button
+						class="mr-2"
+						type="submit"
+						variant="primary"
+						v-bind:disabled="loading"
+					>
+						<template v-if="loading">
+							<font-awesome-icon icon="spinner" class="fa-spin" />
+							Cadastrando...
+						</template>
+						<template v-else>
+							<font-awesome-icon icon="sign-in-alt" />
+							Cadastrar despesa
+						</template>
+					</b-button>
+					<b-button variant="warning" type="button" v-on:click="closeModal">
+						Cancelar
+					</b-button>
+				</div>
 			</b-row>
 		</b-form>
 	</b-modal>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
 	name: 'NewExpense',
@@ -51,18 +70,21 @@ export default {
 		show: false,
 		form: {
 			description: 'Super mercado 20/05',
-			receipt: [],
+			receipt: null,
 			value: 130.00,
 		},
 	}),
+	computed: {
+		...mapGetters('expense', ['loading']),
+	},
 	methods: {
 		...mapActions('expense', ['actionStoreExpense']),
 
+		closeModal() {
+			this.show = false
+		},
 		doInputFileHandle({ target }) {
 			this.form.receipt = target.files[0]
-		},
-		async doOk() {
-			await this.doStoreExpense()
 		},
 		async doStoreExpense() {
 			if (await this.actionStoreExpense(this.form)) {

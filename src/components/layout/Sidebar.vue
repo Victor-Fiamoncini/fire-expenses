@@ -1,5 +1,5 @@
 <template>
-	<b-col cols="2" class="navigation-sidebar">
+	<b-col cols="2" class="navigation-sidebar pt-3 pl-3 pr-0">
 		<h1>
 			Fire Expenses <font-awesome-icon icon="dollar-sign" />
 		</h1>
@@ -46,9 +46,9 @@ export default {
 		...mapActions('auth', ['actionUnsetSession']),
 
 		async doLogout() {
-			await this.actionUnsetSession()
-
 			this.$router.push({ name: 'Logon' })
+
+			await this.actionUnsetSession()
 		},
 	},
 }
@@ -59,7 +59,6 @@ export default {
 
 .navigation-sidebar {
 	background: $dark-low;
-	padding: 15px 0 0 15px;
 	h1 {
 		font-size: 1.75rem;
 		margin: 0 0 20px;

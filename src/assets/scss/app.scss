@@ -2,6 +2,7 @@
 @import 'variables';
 
 * {
+	box-sizing: border-box;
 	font-family: 'Avenir', 'Poppins', sans-serif;
 	outline-color: $featured;
 }
