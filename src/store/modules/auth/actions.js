@@ -43,6 +43,4 @@ export async function actionUnsetSession({ commit }) {
 	commit(AuthTypes.SET_LOADING, false)
 
 	await firebase.auth().signOut()
-
-	router.push({ name: 'Logon' })
 }

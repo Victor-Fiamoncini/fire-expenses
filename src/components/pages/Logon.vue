@@ -1,6 +1,6 @@
 <template>
 	<form v-on:submit.prevent="doLogon">
-		<b-card class="card">
+		<b-card>
 			<h1>
 				Fire Expenses	<font-awesome-icon icon="dollar-sign" />
 			</h1>
@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/variables';
+@import '../../assets/scss/variables';
 
 form {
 	display: flex;

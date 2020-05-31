@@ -13,10 +13,17 @@ body {
 input,
 button,
 textarea {
+	border-radius: 0;
 	box-shadow: none !important;
-	border-color: transparent;
+	border-color: $dark !important;
 	&:focus {
-		border-color: $featured;
+		border-color: $featured !important;
+	}
+}
+
+input {
+	&[type=file] {
+		cursor: pointer;
 	}
 }
 
@@ -25,7 +32,7 @@ textarea {
 .alert,
 .form-control,
 .modal-content {
-  border-radius: 0 !important;
+	border-radius: 0 !important;
 }
 
 .btn-primary {

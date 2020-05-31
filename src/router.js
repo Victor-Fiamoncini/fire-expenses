@@ -12,6 +12,7 @@ const router = new Router({
 			name: 'Logon',
 			component: () => import('./pages/Logon'),
 			meta: {
+				requiresAuth: false,
 				title: 'Logon',
 			},
 		},
@@ -20,39 +21,48 @@ const router = new Router({
 			name: 'Home',
 			component: () => import('./pages/Home'),
 			meta: {
-				auth: true,
 				icon: 'home',
+				requiresAuth: true,
 				title: 'Home',
 			},
 		},
 		{
-			path: '/lista-gastos',
+			path: '/painel/lista-gastos',
 			name: 'Gastos',
 			component: () => import('./pages/ExpenseList'),
 			meta: {
-				auth: true,
 				icon: 'list',
+				requiresAuth: true,
 				title: 'Lista de Dispesas',
 			},
 		},
 	],
 })
 
-router.beforeEach(async (to, from, next) => {
+window.popStateDetected = false
+window.addEventListener('popstate', () => {
+	window.popStateDetected = true
+})
+
+router.beforeEach((to, from, next) => {
 	document.title = `${to.meta.title} - Fire Expenses`
 
 	store.dispatch('auth/actionCheckUid')
 	const hasUid = store.getters['auth/uid']
 
-	if (to.matched.some((record) => record.meta.auth)) {
-		if (hasUid) {
-			return next()
+	if (window.popStateDetected) {
+		return next(false)
+	}
+
+	if (to.matched.some((record) => record.meta.requiresAuth)) {
+		if (!hasUid) {
+			return next({ name: 'Logon' })
 		} else {
-			next({ name: 'Logon' })
+			return next()
 		}
 	} else {
 		if (hasUid) {
-			return next({ name: 'Home' })
+			return next({ to: 'Home' })
 		} else {
 			next()
 		}

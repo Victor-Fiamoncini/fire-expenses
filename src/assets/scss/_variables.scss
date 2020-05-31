@@ -7,8 +7,8 @@ $light-medium: #ddd !important;
 $ligther: #ddd !important;
 $light: #fff !important;
 
-$featured: #ff9900 !important;
-$featured-dark: #d68100 !important;
+$featured: #80bdff !important;
+$featured-dark: darken(#80bdff, 10) !important;
 
 :root {
   --dark: #{$dark};

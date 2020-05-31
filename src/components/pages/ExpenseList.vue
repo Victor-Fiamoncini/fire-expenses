@@ -4,10 +4,9 @@
 
 <script>
 export default {
-	name: 'ExpenseList'
+	name: 'ExpenseList',
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>

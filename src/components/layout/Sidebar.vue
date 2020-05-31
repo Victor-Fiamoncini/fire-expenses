@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import NewExpense from './NewExpense'
+import NewExpense from '../util/NewExpense'
 import { mapActions } from 'vuex'
 
 export default {
@@ -47,13 +47,15 @@ export default {
 
 		async doLogout() {
 			await this.actionUnsetSession()
+
+			this.$router.push({ name: 'Logon' })
 		},
 	},
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/app';
+@import '../../assets/scss/app';
 
 .navigation-sidebar {
 	background: $dark-low;

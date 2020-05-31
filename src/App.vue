@@ -1,25 +1,18 @@
 <template>
 	<div id="root">
-		<b-container fluid v-if="uid">
-			<b-row>
-				<Sidebar />
-				<b-col>
-					<router-view />
-				</b-col>
-			</b-row>
-		</b-container>
+		<Dashboard v-if="uid" />
 		<router-view v-else />
 	</div>
 </template>
 
 <script>
+import Dashboard from './components/layout/Dashboard'
 import { mapGetters } from 'vuex'
-import Sidebar from './components/Sidebar'
 
 export default {
 	name: 'App',
 	components: {
-		Sidebar,
+		Dashboard,
 	},
 	computed: {
 		...mapGetters('auth', ['uid']),
