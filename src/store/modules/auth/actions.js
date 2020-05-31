@@ -37,10 +37,11 @@ export function actionSetUid({ commit }, payload) {
 
 export async function actionUnsetSession({ commit }) {
 	uid.destroyUid()
-	commit(AuthTypes.SET_UID, '')
-	commit(AuthTypes.SET_USER, {})
-	commit(AuthTypes.SET_ERRORS, [])
-	commit(AuthTypes.SET_LOADING, false)
+
+	commit(AuthTypes.REMOVE_UID)
+	commit(AuthTypes.REMOVE_USER)
+	commit(AuthTypes.REMOVE_MESSAGE)
+	commit(AuthTypes.REMOVE_LOADING)
 
 	await firebase.auth().signOut()
 }

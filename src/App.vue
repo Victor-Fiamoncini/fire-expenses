@@ -1,5 +1,12 @@
 <template>
 	<div id="root">
+		<Notification
+			v-for="(message, i) in messages"
+			v-bind:key="i"
+			v-bind:index="i"
+			v-bind:text="message.text"
+			v-bind:type="message.type"
+		/>
 		<Dashboard v-if="uid" />
 		<router-view v-else />
 	</div>
@@ -7,15 +14,20 @@
 
 <script>
 import Dashboard from './components/layout/Dashboard'
+import Notification from './components/layout/Notification'
 import { mapGetters } from 'vuex'
 
 export default {
 	name: 'App',
 	components: {
 		Dashboard,
+		Notification,
 	},
 	computed: {
-		...mapGetters('auth', ['uid']),
+		...mapGetters({
+			uid: ['auth/uid'],
+			messages: ['message/messages'],
+		}),
 	},
 }
 </script>

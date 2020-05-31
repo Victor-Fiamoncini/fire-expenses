@@ -65,9 +65,9 @@ export default {
 			await this.doStoreExpense()
 		},
 		async doStoreExpense() {
-			await this.actionStoreExpense(this.form)
-
-			this.show = false
+			if (await this.actionStoreExpense(this.form)) {
+				this.show = false
+			}
 		},
 	},
 }

@@ -1,5 +1,6 @@
 import { randomBytes } from 'crypto'
 import firebase from '../../../services/firebase'
+import store from '../../index'
 import * as uid from '../../../utils/uid'
 
 import ExpenseTypes from './types'
@@ -7,7 +8,7 @@ import ExpenseTypes from './types'
 export async function actionStoreExpense({ commit }, payload) {
 	try {
 		let url = ''
-		const database = firebase.database().ref(uid.getUid())
+		const database = firebase.datasbase().ref(uid.getUid())
 		const id = database.push().key
 
 		if (payload.receipt) {
@@ -34,9 +35,10 @@ export async function actionStoreExpense({ commit }, payload) {
 
 			commit(ExpenseTypes.SET_EXPENSE, newExpense)
 		})
-
-		console.log('concluiu a promise')
 	} catch (err) {
-		console.log(err)
+		store.dispatch('message/actionSetMessage', {
+			text: 'Erro ao cadastrar a despesa',
+			type: 'danger',
+		})
 	}
 }
