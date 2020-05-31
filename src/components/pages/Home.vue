@@ -1,57 +1,77 @@
 <template>
-	<div id="home">
+	<b-container fluid>
 		<b-row>
-			<b-col cols="6" class="home-box">
-				<small>Você gastou</small>
-				<div class="value">R$ 900.00</div>
-				<small>em 30 compras</small>
-			</b-col>
-			<b-col cols="6" class="home-box">
-				<small>A média de gastos é de</small>
-				<div class="value">R$ 91.31</div>
-			</b-col>
-			<b-col cols="6" class="home-box">
-				<small>A maior despesa foi de</small>
-				<div class="value">R$ 92.00</div>
-				<small>No dia 02/02/2020</small>
-			</b-col>
-			<b-col cols="6" class="home-box">
-				<small>A menor despesa foi de</small>
-				<div class="value">R$ 12.00</div>
-				<small>No dia 06/02/2020</small>
+			<Sidebar />
+			<b-col>
+				<div id="home">
+					<b-row>
+						<b-col cols="6" class="home-box">
+							<small>Você gastou</small>
+							<div class="value" v-money-format="getValues.totalSpent" />
+							<small>em {{ getValues.length }} compras</small>
+						</b-col>
+						<b-col cols="6" class="home-box">
+							<small>A média de gastos é de</small>
+							<div class="value" v-money-format="getValues.average" />
+						</b-col>
+						<b-col cols="6" class="home-box">
+							<small>A maior despesa foi de</small>
+							<div class="value" v-money-format="getValues.biggest.value" />
+							<small>No dia 02/02/2020</small>
+						</b-col>
+						<b-col cols="6" class="home-box">
+							<small>A menor despesa foi de</small>
+							<div class="value" v-money-format="getValues.lowest.value" />
+							<small>No dia 06/02/2020</small>
+						</b-col>
+					</b-row>
+				</div>
 			</b-col>
 		</b-row>
-	</div>
+	</b-container>
 </template>
 
 <script>
+import Sidebar from '../layout/Sidebar'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
 	name: 'Home',
+	components: {
+		Sidebar,
+	},
+	created() {
+		this.actionIndexExpenses()
+	},
 	methods: {
 		...mapActions('expense', ['actionIndexExpenses']),
 	},
 	computed: {
 		...mapGetters('expense', ['expenses']),
 
-		totals() {
+		getValues() {
+			const { expenses } = this
+
 			const values = {
 				totalSpent: 0,
 				average: 0,
 				biggest: {},
 				lowest: {},
+				length: expenses.length ? expenses.length : 0
 			}
 
+			if (expenses.length) {
+				values.totalSpent = expenses
+					.map(expense => parseFloat(expense.value))
+					.reduce((acc, expense) => acc + expense, 0)
+
+				values.average = values.totalSpent / expenses.length
+				values.biggest = expenses.sort((a, b) => Number(b.value) - Number(a.value))[0]
+				values.lowest = expenses.sort((a, b) => Number(a.value) - Number(b.value))[0]
+			}
 
 			return values
 		},
-	},
-	created() {
-		this.actionIndexExpenses()
-
-		console.log(this.$props.expenses)
-
 	},
 }
 </script>

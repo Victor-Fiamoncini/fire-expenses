@@ -7,27 +7,21 @@
 			v-bind:text="message.text"
 			v-bind:type="message.type"
 		/>
-		<Dashboard v-if="uid" />
-		<router-view v-else />
+		<router-view />
 	</div>
 </template>
 
 <script>
-import Dashboard from './components/layout/Dashboard'
 import Notification from './components/layout/Notification'
 import { mapGetters } from 'vuex'
 
 export default {
 	name: 'App',
 	components: {
-		Dashboard,
 		Notification,
 	},
 	computed: {
-		...mapGetters({
-			uid: ['auth/uid'],
-			messages: ['message/messages'],
-		}),
+		...mapGetters('message', ['messages']),
 	},
 }
 </script>

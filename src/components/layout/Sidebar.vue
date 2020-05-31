@@ -46,9 +46,9 @@ export default {
 		...mapActions('auth', ['actionUnsetSession']),
 
 		async doLogout() {
-			this.$router.push({ name: 'Logon' })
-
 			await this.actionUnsetSession()
+
+			this.$router.replace({ name: 'Logon' })
 		},
 	},
 }
@@ -58,6 +58,7 @@ export default {
 @import '../../assets/scss/app';
 
 .navigation-sidebar {
+	height: 100vh;
 	background: $dark-low;
 	h1 {
 		font-size: 1.75rem;
@@ -68,7 +69,6 @@ export default {
 	}
 	.nav {
 		margin-left: -15px;
-		height: 100vh;
 		.nav-link {
 			color: $light;
 			font-weight: 600;

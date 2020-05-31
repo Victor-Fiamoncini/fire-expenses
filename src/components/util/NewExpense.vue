@@ -19,7 +19,7 @@
 				</b-form-group>
 				<b-form-group class="col-4" label="Valor" label-for="value">
 					<b-form-input
-						type="number"
+						type="text"
 						id="value"
 						trim
 						required
@@ -48,11 +48,15 @@
 							Cadastrando...
 						</template>
 						<template v-else>
-							<font-awesome-icon icon="sign-in-alt" />
 							Cadastrar despesa
 						</template>
 					</b-button>
-					<b-button variant="warning" type="button" v-on:click="closeModal">
+					<b-button
+						class="mr-0"
+						variant="secondary"
+						type="button"
+						v-on:click="closeModal"
+					>
 						Cancelar
 					</b-button>
 				</div>

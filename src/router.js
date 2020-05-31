@@ -12,7 +12,6 @@ const router = new Router({
 			name: 'Logon',
 			component: () => import('./components/pages/Logon'),
 			meta: {
-				requiresAuth: false,
 				title: 'Logon',
 			},
 		},
@@ -56,13 +55,13 @@ router.beforeEach((to, from, next) => {
 
 	if (to.matched.some((record) => record.meta.requiresAuth)) {
 		if (!hasUid) {
-			return next({ name: 'Logon' })
+			return router.push({ name: 'Logon' })
 		} else {
 			return next()
 		}
 	} else {
 		if (hasUid) {
-			return next({ to: 'Home' })
+			return router.push({ name: 'Home' })
 		} else {
 			next()
 		}
