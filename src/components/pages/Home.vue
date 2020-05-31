@@ -4,7 +4,7 @@
 			<Sidebar />
 			<b-col>
 				<div id="home">
-					<b-row>
+					<b-row v-if="getValues.length">
 						<b-col cols="6" class="home-box">
 							<small>Você gastou</small>
 							<div class="value" v-money-format="getValues.totalSpent" />
@@ -17,14 +17,17 @@
 						<b-col cols="6" class="home-box">
 							<small>A maior despesa foi de</small>
 							<div class="value" v-money-format="getValues.biggest.value" />
-							<small>No dia 02/02/2020</small>
+							<small v-date-format="getValues.biggest.createdAt" />
 						</b-col>
 						<b-col cols="6" class="home-box">
 							<small>A menor despesa foi de</small>
 							<div class="value" v-money-format="getValues.lowest.value" />
-							<small>No dia 06/02/2020</small>
+							<small v-date-format="getValues.lowest.createdAt" />
 						</b-col>
 					</b-row>
+					<div class="not-found-message" v-else>
+						<p>Não há despesas cadastradas </p>
+					</div>
 				</div>
 			</b-col>
 		</b-row>
@@ -57,7 +60,7 @@ export default {
 				average: 0,
 				biggest: {},
 				lowest: {},
-				length: expenses.length ? expenses.length : 0
+				length: expenses.length ? expenses.length : false
 			}
 
 			if (expenses.length) {

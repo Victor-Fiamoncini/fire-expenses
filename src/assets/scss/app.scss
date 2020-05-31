@@ -68,3 +68,14 @@ input {
     background-color: var(--featured) !important;
   }
 }
+
+.not-found-message {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	p {
+		font-size: 2rem;
+		color: $featured;
+	}
+}
