@@ -55,7 +55,11 @@ export function actionIndexExpenses({ commit }) {
 
 		database.on('value', (snapshot) => {
 			const values = snapshot.val()
-			const expenses = Object.keys(values).map((id) => values[id])
+			let expenses = []
+
+			if (values) {
+				expenses = Object.keys(values).map((id) => values[id])
+			}
 
 			commit(ExpenseTypes.SET_EXPENSES, expenses)
 		})

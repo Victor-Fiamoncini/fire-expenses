@@ -60,10 +60,10 @@ export default {
 				average: 0,
 				biggest: {},
 				lowest: {},
-				length: expenses.length ? expenses.length : false
+				length: expenses.length ? expenses.length : 0
 			}
 
-			if (expenses.length) {
+			if (expenses.length > 0) {
 				values.totalSpent = expenses
 					.map(expense => parseFloat(expense.value))
 					.reduce((acc, expense) => acc + expense, 0)

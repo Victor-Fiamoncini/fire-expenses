@@ -9,6 +9,7 @@ $light: #fff !important;
 
 $featured: #80bdff !important;
 $featured-dark: darken(#80bdff, 10) !important;
+$featured-light: lighten(#80bdff, 10) !important;
 
 :root {
   --dark: #{$dark};
