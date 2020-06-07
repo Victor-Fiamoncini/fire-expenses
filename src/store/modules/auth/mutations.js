@@ -1,22 +1,28 @@
-import AuthTypes from './types'
+import Types from './types'
 
 export default {
-	[AuthTypes.SET_UID]: (state, payload) => {
+	[Types.SET_UID]: (state, payload) => {
 		state.uid = payload
 	},
-	[AuthTypes.SET_USER]: (state, payload) => {
+	[Types.SET_USER]: (state, payload) => {
 		state.user = payload
 	},
-	[AuthTypes.SET_LOADING]: (state, payload) => {
+	[Types.SET_LOADING]: (state, payload) => {
 		state.loading = payload
 	},
-	[AuthTypes.REMOVE_UID]: (state) => {
+	[Types.SET_MESSAGE]: (state, payload) => {
+		state.message = payload
+	},
+	[Types.REMOVE_UID]: state => {
 		state.uid = ''
 	},
-	[AuthTypes.REMOVE_USER]: (state) => {
+	[Types.REMOVE_USER]: state => {
 		state.user = {}
 	},
-	[AuthTypes.REMOVE_LOADING]: (state) => {
+	[Types.REMOVE_LOADING]: state => {
 		state.loading = false
+	},
+	[Types.REMOVE_MESSAGE]: state => {
+		state.message = {}
 	},
 }

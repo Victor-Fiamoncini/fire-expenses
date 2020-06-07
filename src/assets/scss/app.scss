@@ -32,7 +32,7 @@ button,
 textarea {
 	border-radius: 0;
 	box-shadow: none !important;
-	border-color: $dark !important;
+	border-color: $featured !important;
 	&:focus {
 		border-color: $featured !important;
 	}
@@ -61,11 +61,11 @@ input {
 }
 
 .btn-outline-primary {
-  border-color: var(--featured) !important;
-  color: var(--featured) !important;
+  border-color: $featured !important;
+  color: $featured !important;
   &:hover {
-    color: var(--darker) !important;
-    background-color: var(--featured) !important;
+    color: $darker !important;
+    background-color: $featured !important;
   }
 }
 

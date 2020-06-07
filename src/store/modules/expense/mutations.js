@@ -1,22 +1,28 @@
-import ExpenseTypes from './types'
+import Types from './types'
 
 export default {
-	[ExpenseTypes.SET_EXPENSE]: (state, payload) => {
+	[Types.SET_EXPENSE]: (state, payload) => {
 		state.expense = payload
 	},
-	[ExpenseTypes.SET_EXPENSES]: (state, payload) => {
+	[Types.SET_EXPENSES]: (state, payload) => {
 		state.expenses = payload
 	},
-	[ExpenseTypes.SET_LOADING]: (state, payload) => {
+	[Types.SET_LOADING]: (state, payload) => {
 		state.loading = payload
 	},
-	[ExpenseTypes.REMOVE_EXPENSE]: (state) => {
+	[Types.SET_MESSAGE]: (state, payload) => {
+		state.message = payload
+	},
+	[Types.REMOVE_EXPENSE]: state => {
 		state.expense = {}
 	},
-	[ExpenseTypes.REMOVE_EXPENSES]: (state) => {
+	[Types.REMOVE_EXPENSES]: state => {
 		state.expenses = []
 	},
-	[ExpenseTypes.REMOVE_LOADING]: (state) => {
+	[Types.REMOVE_LOADING]: state => {
 		state.loading = false
+	},
+	[Types.REMOVE_MESSAGE]: state => {
+		state.message = {}
 	},
 }

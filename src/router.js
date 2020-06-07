@@ -16,21 +16,27 @@ const router = new Router({
 			},
 		},
 		{
+			path: '/cadastro',
+			name: 'Register',
+			component: () => import('./components/pages/Register'),
+			meta: {
+				title: 'Cadastro',
+			},
+		},
+		{
 			path: '/painel',
 			name: 'Home',
 			component: () => import('./components/pages/Home'),
 			meta: {
-				icon: 'home',
 				requiresAuth: true,
 				title: 'Home',
 			},
 		},
 		{
-			path: '/painel/lista-gastos',
-			name: 'Gastos',
+			path: '/painel/lista',
+			name: 'Expenses',
 			component: () => import('./components/pages/ExpenseList'),
 			meta: {
-				icon: 'list',
 				requiresAuth: true,
 				title: 'Lista de Dispesas',
 			},
@@ -53,7 +59,7 @@ router.beforeEach((to, from, next) => {
 		return next(false)
 	}
 
-	if (to.matched.some((record) => record.meta.requiresAuth)) {
+	if (to.matched.some(route => route.meta.requiresAuth)) {
 		if (!hasUid) {
 			return router.push({ name: 'Logon' })
 		} else {

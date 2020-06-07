@@ -1,19 +1,24 @@
 <template>
 	<b-col cols="2" class="navigation-sidebar pt-3 pl-3 pr-0">
-		<h1>
-			Fire Expenses <font-awesome-icon icon="dollar-sign" />
-		</h1>
+		<h1>Fire Expenses <font-awesome-icon icon="dollar-sign" /></h1>
 		<b-nav vertical>
 			<router-link
 				exact
 				exact-active-class="active"
 				class="nav-link"
-				v-for="(route, i) in routerLinks"
-				v-bind:key="i"
-				v-bind:to="{ name: route.name }"
+				to="/painel"
 			>
-				<font-awesome-icon v-bind:icon="route.meta.icon" />
-				{{ route.meta.title }}
+				<font-awesome-icon icon="home" />
+				Home
+			</router-link>
+			<router-link
+				exact
+				exact-active-class="active"
+				class="nav-link"
+				to="/painel/lista"
+			>
+				<font-awesome-icon icon="list" />
+				Lista de Dispesas
 			</router-link>
 			<b-nav-item v-b-modal.new-expense>
 				<font-awesome-icon icon="wallet" />
@@ -38,7 +43,7 @@ export default {
 		NewExpense,
 	},
 	computed: {
-		routerLinks() {
+		routes() {
 			return this.$router.options.routes.filter(route => route.name !== 'Logon')
 		},
 	},
@@ -72,7 +77,7 @@ export default {
 		.nav-link {
 			color: $light;
 			font-weight: 600;
-			transition: all .3s;
+			transition: all 0.3s;
 			&.active {
 				color: $featured;
 				background: transparent;

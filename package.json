@@ -1,7 +1,11 @@
 {
   "name": "vue-firebase",
+  "author": {
+    "name": "Victor B. Fiamoncini",
+    "email": "victor.fiamoncini@gmail.com"
+  },
+  "license": "MIT",
   "version": "0.1.0",
-	"license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -15,7 +19,6 @@
     "bootstrap-vue": "^2.15.0",
     "core-js": "^3.6.5",
     "firebase": "^7.14.6",
-    "lodash.groupby": "^4.6.0",
     "moment": "^2.26.0",
     "uuid": "^8.1.0",
     "vue": "^2.6.11",

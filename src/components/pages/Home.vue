@@ -26,7 +26,7 @@
 						</b-col>
 					</b-row>
 					<div class="not-found-message" v-else>
-						<p>Não há despesas cadastradas </p>
+						<p>Não há despesas cadastradas</p>
 					</div>
 				</div>
 			</b-col>
@@ -60,7 +60,7 @@ export default {
 				average: 0,
 				biggest: {},
 				lowest: {},
-				length: expenses.length ? expenses.length : 0
+				length: expenses.length ? expenses.length : 0,
 			}
 
 			if (expenses.length > 0) {
@@ -69,8 +69,12 @@ export default {
 					.reduce((acc, expense) => acc + expense, 0)
 
 				values.average = values.totalSpent / expenses.length
-				values.biggest = expenses.sort((a, b) => Number(b.value) - Number(a.value))[0]
-				values.lowest = expenses.sort((a, b) => Number(a.value) - Number(b.value))[0]
+				values.biggest = expenses.sort(
+					(a, b) => Number(b.value) - Number(a.value)
+				)[0]
+				values.lowest = expenses.sort(
+					(a, b) => Number(a.value) - Number(b.value)
+				)[0]
 			}
 
 			return values

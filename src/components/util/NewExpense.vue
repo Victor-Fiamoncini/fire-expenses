@@ -6,7 +6,7 @@
 		hide-footer
 		v-model="show"
 	>
-		<b-form v-on:submit.prevent="doStoreExpense">
+		<b-form @submit.prevent="doStoreExpense">
 			<b-row>
 				<b-form-group class="col-8" label="Descrição" label-for="description">
 					<b-form-input
@@ -33,7 +33,7 @@
 						placeholder="Adicionar recido"
 						drop-placeholder="Solte o arquivo aqui"
 						v-model="form.receipt"
-						v-on:change="doInputFileHandle"
+						@change="doInputFileHandle"
 					/>
 				</b-form-group>
 				<div class="modal-footer w-100 px-3 pb-0">
@@ -41,7 +41,7 @@
 						class="mr-2"
 						type="submit"
 						variant="primary"
-						v-bind:disabled="loading"
+						:disabled="loading"
 					>
 						<template v-if="loading">
 							<font-awesome-icon icon="spinner" class="fa-spin" />
@@ -55,7 +55,7 @@
 						class="mr-0"
 						variant="secondary"
 						type="button"
-						v-on:click="closeModal"
+						@click="doCloseModal"
 					>
 						Cancelar
 					</b-button>
@@ -75,7 +75,7 @@ export default {
 		form: {
 			description: 'Super mercado 20/05',
 			receipt: null,
-			value: 130.00,
+			value: 130.0,
 		},
 	}),
 	computed: {
@@ -84,7 +84,7 @@ export default {
 	methods: {
 		...mapActions('expense', ['actionStoreExpense']),
 
-		closeModal() {
+		doCloseModal() {
 			this.show = false
 		},
 		doInputFileHandle({ target }) {

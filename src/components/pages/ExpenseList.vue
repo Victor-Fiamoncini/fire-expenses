@@ -3,13 +3,16 @@
 		<b-row>
 			<Sidebar />
 			<b-col id="expesne-list">
-				<b-container>
+				<b-container v-if="expenses.length > 0">
 					<ExpenseListItem
 						v-for="expense in expenses"
-						v-bind:key="expense.id"
-						v-bind:expense="expense"
+						:key="expense.id"
+						:expense="expense"
 					/>
 				</b-container>
+				<div class="not-found-message" v-else>
+					<p>Não há despesas cadastradas</p>
+				</div>
 			</b-col>
 		</b-row>
 	</b-container>
@@ -68,6 +71,9 @@ export default {
 		padding-top: 15px;
 		padding-bottom: 15px;
 		font-size: 1rem;
+		#expenseListItem:last-of-type {
+			margin-bottom: 0;
+		}
 	}
 }
 

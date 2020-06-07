@@ -7,9 +7,10 @@ $light-medium: #ddd !important;
 $ligther: #ddd !important;
 $light: #fff !important;
 
-$featured: #80bdff !important;
-$featured-dark: darken(#80bdff, 10) !important;
-$featured-light: lighten(#80bdff, 10) !important;
+$featured: #faca33 !important;
+$featured-dark: darken(#faca33, 10) !important;
+$featured-light: lighten(#faca33, 10) !important;
+$secondary: #80bdff !important;
 
 :root {
   --dark: #{$dark};
@@ -22,4 +23,5 @@ $featured-light: lighten(#80bdff, 10) !important;
   --light: #{$light};
   --featured: #{$featured};
   --featured-dark: #{$featured-dark};
+  --secondary: #{$secondary};
 }

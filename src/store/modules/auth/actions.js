@@ -1,29 +1,28 @@
 import firebase from '../../../services/firebase'
 import router from '../../../router'
-import store from '../../'
 import * as uid from '../../../utils/uid'
 
-import AuthTypes from './types'
+import Types from './types'
 
 export async function actionLogon({ commit, dispatch }, payload) {
-	commit(AuthTypes.SET_LOADING, true)
-	const { email, password } = payload
-
 	try {
-		const res = await firebase
-			.auth()
-			.signInWithEmailAndPassword(email, password)
+		commit(Types.SET_LOADING, true)
 
-		dispatch('actionSetUid', res.user.uid)
-		commit(AuthTypes.SET_LOADING, false)
+		const response = await firebase
+			.auth()
+			.signInWithEmailAndPassword(payload.email, payload.password)
+
+		dispatch('actionSetUid', response.user.uid)
+
+		commit(Types.SET_LOADING, false)
 
 		router.push({ name: 'Home' })
 	} catch (err) {
-		store.dispatch('message/actionSetMessage', {
+		dispatch('actionUnsetSession')
+		commit(Types.SET_MESSAGE, {
 			text: 'Credenciais inválidas',
 			type: 'danger',
 		})
-		dispatch('actionUnsetSession')
 	}
 }
 
@@ -37,15 +36,17 @@ export function actionCheckUid({ dispatch }) {
 
 export function actionSetUid({ commit }, payload) {
 	uid.setUid(payload)
-	commit(AuthTypes.SET_UID, payload)
+
+	commit(Types.SET_UID, payload)
 }
 
 export async function actionUnsetSession({ commit }) {
 	uid.destroyUid()
 
-	commit(AuthTypes.REMOVE_UID)
-	commit(AuthTypes.REMOVE_USER)
-	commit(AuthTypes.REMOVE_LOADING)
+	commit(Types.REMOVE_UID)
+	commit(Types.REMOVE_USER)
+	commit(Types.REMOVE_LOADING)
+	commit(Types.REMOVE_MESSAGE)
 
 	await firebase.auth().signOut()
 }
