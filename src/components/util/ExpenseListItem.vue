@@ -1,13 +1,13 @@
 <template>
 	<b-row id="expense-list-item">
-		<b-col cols="2">
-			10/02/2020
+		<b-col cols="3">
+			<p v-date-format="expense.createdAt" />
 		</b-col>
-		<b-col cols="8">
-			Lorem ipsum, dolor sit amet consectetur adipisicing elit. In corporis, labore illum commodi iusto earum error rem iure reiciendis! Quis!
+		<b-col cols="7">
+			<p>{{ expense.description }}</p>
 		</b-col>
 		<b-col cols="2">
-			R$ 100
+			<p class="value" v-money-format="expense.value" />
 		</b-col>
 	</b-row>
 </template>
@@ -15,6 +15,7 @@
 <script>
 export default {
 	name: 'ExpenseListItem',
+	props: ['expense'],
 }
 </script>
 
@@ -23,8 +24,8 @@ export default {
 
 #expense-list-item {
 	border-bottom: 1px solid $featured;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	margin: 10px 0 20px;
+	padding: 10px 4px;
 	display: flex;
 	align-items: center;
 }
