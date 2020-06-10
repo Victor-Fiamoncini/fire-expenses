@@ -20,32 +20,34 @@
 				<font-awesome-icon icon="list" />
 				Lista de Dispesas
 			</router-link>
-			<b-nav-item v-b-modal.new-expense>
+			<b-nav-item v-b-modal.new-expense outline>
 				<font-awesome-icon icon="wallet" />
 				Nova Dispesa
 			</b-nav-item>
-			<b-nav-item v-on:click.prevent="doLogout">
+			<b-nav-item v-b-modal.delete-account outline>
+				<font-awesome-icon icon="trash-alt" />
+				Excluir conta
+			</b-nav-item>
+			<b-nav-item class="logout" v-on:click.prevent="doLogout">
 				<font-awesome-icon icon="sign-out-alt" />
 				Logout
 			</b-nav-item>
 		</b-nav>
+		<DeleteAccount />
 		<NewExpense />
 	</b-col>
 </template>
 
 <script>
+import DeleteAccount from '../util/DeleteAccount'
 import NewExpense from '../util/NewExpense'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
 	name: 'Sidebar',
 	components: {
+		DeleteAccount,
 		NewExpense,
-	},
-	computed: {
-		routes() {
-			return this.$router.options.routes.filter(route => route.name !== 'Logon')
-		},
 	},
 	methods: {
 		...mapActions('auth', ['actionUnsetSession']),
@@ -65,6 +67,7 @@ export default {
 .navigation-sidebar {
 	height: 100vh;
 	background: $dark-low;
+	position: relative;
 	h1 {
 		font-size: 1.75rem;
 		margin: 0 0 20px;
@@ -74,6 +77,13 @@ export default {
 	}
 	.nav {
 		margin-left: -15px;
+		button {
+		}
+		.nav-item.logout {
+			position: absolute;
+			bottom: 20px;
+			width: 100%;
+		}
 		.nav-link {
 			color: $light;
 			font-weight: 600;

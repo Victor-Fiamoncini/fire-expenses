@@ -4,57 +4,67 @@ import * as uid from '../../../utils/uid'
 
 import Types from './types'
 
-export async function actionStoreExpense({ commit }, payload) {
+export async function actionStoreExpense({ commit, dispatch }, payload) {
+	let url = ''
+	const { description, receipt, value } = payload
+
 	try {
-		let url = ''
-		commit(Types.SET_LOADING, true)
+		commit(Types.SET_LOADING)
 
-		const database = firebase.database().ref(uid.getUid())
-		const id = database.push().key
+		if (receipt) {
+			const filename = `${randomBytes(16).toString('hex')}-${receipt.name}`
 
-		if (payload.receipt) {
-			const snapshot = await firebase
+			const file = await firebase
 				.storage()
 				.ref(uid.getUid())
-				.child(`${randomBytes(16).toString('hex')}-${payload.receipt.name}`)
-				.put(payload.receipt)
+				.child(filename)
+				.put(receipt)
 
-			url = await snapshot.ref.getDownloadURL()
+			url = await file.ref.getDownloadURL()
 		}
 
 		const newExpense = {
-			id,
 			createdAt: new Date().getTime(),
-			...payload,
+			description,
 			receipt: url,
+			user: uid.getUid(),
+			value,
 		}
 
-		await database.child(id).set(newExpense)
+		await firebase.firestore().collection('expenses').add(newExpense)
 
 		commit(Types.SET_EXPENSE, newExpense)
-		commit(Types.SET_LOADING, false)
+		commit(Types.REMOVE_LOADING)
+
+		dispatch('actionFetchExpenses')
+		alert('Despesa cadastrada com sucesso')
 
 		return true
 	} catch (err) {
-		console.log(err)
+		commit(Types.REMOVE_LOADING)
+		alert('Erro ao cadastrar despesa, tente novamente')
 	}
 }
 
-export function actionIndexExpenses({ commit }) {
+export async function actionFetchExpenses({ commit }) {
 	try {
-		const database = firebase.database().ref(uid.getUid())
+		const expenses = await firebase
+			.firestore()
+			.collection('expenses')
+			.where('user', '==', uid.getUid())
+			.get()
 
-		database.on('value', snapshot => {
-			const values = snapshot.val()
-			let expenses = []
+		let serializedExpenses = []
 
-			if (values) {
-				expenses = Object.keys(values).map(id => values[id])
-			}
-
-			commit(Types.SET_EXPENSES, expenses)
+		expenses.forEach(expense => {
+			serializedExpenses = [
+				...serializedExpenses,
+				{ id: expense.id, ...expense.data() },
+			]
 		})
+
+		commit(Types.SET_EXPENSES, serializedExpenses)
 	} catch (err) {
-		console.log(err)
+		alert('Erro ao obter as suas despesas')
 	}
 }

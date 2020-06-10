@@ -10,7 +10,6 @@ $light: #fff !important;
 $featured: #faca33 !important;
 $featured-dark: darken(#faca33, 10) !important;
 $featured-light: lighten(#faca33, 10) !important;
-$secondary: #80bdff !important;
 
 :root {
   --dark: #{$dark};
@@ -23,5 +22,4 @@ $secondary: #80bdff !important;
   --light: #{$light};
   --featured: #{$featured};
   --featured-dark: #{$featured-dark};
-  --secondary: #{$secondary};
 }

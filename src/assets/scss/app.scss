@@ -33,15 +33,20 @@ textarea {
 	border-radius: 0;
 	box-shadow: none !important;
 	border-color: $featured !important;
-	&:focus {
-		border-color: $featured !important;
-	}
 }
 
 input {
 	&[type=file] {
 		cursor: pointer;
+		&:focus {
+			border-color: $featured !important;
+		}
 	}
+}
+
+label {
+	box-shadow: none !important;
+	border-color: $featured !important;
 }
 
 .btn,
@@ -50,6 +55,10 @@ input {
 .form-control,
 .modal-content {
 	border-radius: 0 !important;
+}
+
+.focus {
+	border-color: $featured !important;
 }
 
 .btn-primary {
@@ -78,4 +87,12 @@ input {
 		font-size: 2rem;
 		color: $featured;
 	}
+}
+
+.guest-link {
+	display: block;
+	margin: 16px 0 -20px;
+	color: $featured;
+	font-size: 0.75rem;
+	transition: all .3s;
 }

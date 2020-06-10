@@ -29,11 +29,11 @@ export default {
 		ExpenseListItem,
 		Sidebar,
 	},
-	created() {
-		this.actionIndexExpenses()
+	async created() {
+		await this.actionFetchExpenses()
 	},
 	methods: {
-		...mapActions('expense', ['actionIndexExpenses']),
+		...mapActions('expense', ['actionFetchExpenses']),
 	},
 	computed: {
 		...mapGetters('expense', ['expenses']),
@@ -68,6 +68,8 @@ export default {
 		}
 	}
 	.container {
+		overflow: hidden auto;
+		height: 100vh;
 		padding-top: 15px;
 		padding-bottom: 15px;
 		font-size: 1rem;

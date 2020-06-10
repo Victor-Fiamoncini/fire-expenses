@@ -1,12 +1,6 @@
 <template>
 	<div>
 		<form @submit.prevent="doLogonRequest">
-			<Alert
-				v-if="message.text"
-				module="auth"
-				:message="message.text"
-				:type="message.type"
-			/>
 			<b-card>
 				<h1>Fire Expenses <font-awesome-icon icon="dollar-sign" /></h1>
 				<b-card-body>
@@ -43,6 +37,9 @@
 							Entrar
 						</template>
 					</b-button>
+					<router-link to="/cadastro" class="guest-link">
+						Ainda não possui conta? Cadastre-se aqui
+					</router-link>
 				</b-card-body>
 			</b-card>
 		</form>
@@ -50,14 +47,10 @@
 </template>
 
 <script>
-import Alert from '../layout/Alert'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
 	name: 'Logon',
-	components: {
-		Alert,
-	},
 	data: () => ({
 		form: {
 			email: 'victor@mail.com',
@@ -65,7 +58,7 @@ export default {
 		},
 	}),
 	computed: {
-		...mapGetters('auth', ['loading', 'message']),
+		...mapGetters('auth', ['loading']),
 	},
 	methods: {
 		...mapActions('auth', ['actionLogon']),
@@ -86,9 +79,6 @@ form {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-	.alert {
-		width: 40%;
-	}
 	h1 {
 		svg {
 			color: $featured;

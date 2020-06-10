@@ -9,6 +9,8 @@ import {
 	faWallet,
 	faSignInAlt,
 	faSpinner,
+	faPaperclip,
+	faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -18,7 +20,9 @@ library.add(
 	faList,
 	faWallet,
 	faSignInAlt,
-	faSpinner
+	faSpinner,
+	faPaperclip,
+	faTrashAlt
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

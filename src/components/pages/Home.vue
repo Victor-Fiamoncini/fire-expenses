@@ -4,25 +4,37 @@
 			<Sidebar />
 			<b-col>
 				<div id="home">
-					<b-row v-if="getValues.length">
+					<b-row v-if="getInformationValues.length">
 						<b-col cols="6" class="home-box">
 							<small>Você gastou</small>
-							<div class="value" v-money-format="getValues.totalSpent" />
-							<small>em {{ getValues.length }} compras</small>
+							<div
+								class="value"
+								v-money-format="getInformationValues.totalSpent"
+							/>
+							<small>em {{ getInformationValues.length }} compras</small>
 						</b-col>
 						<b-col cols="6" class="home-box">
 							<small>A média de gastos é de</small>
-							<div class="value" v-money-format="getValues.average" />
+							<div
+								class="value"
+								v-money-format="getInformationValues.average"
+							/>
 						</b-col>
 						<b-col cols="6" class="home-box">
 							<small>A maior despesa foi de</small>
-							<div class="value" v-money-format="getValues.biggest.value" />
-							<small v-date-format="getValues.biggest.createdAt" />
+							<div
+								class="value"
+								v-money-format="getInformationValues.biggest.value"
+							/>
+							<small v-date-format="getInformationValues.biggest.createdAt" />
 						</b-col>
 						<b-col cols="6" class="home-box">
 							<small>A menor despesa foi de</small>
-							<div class="value" v-money-format="getValues.lowest.value" />
-							<small v-date-format="getValues.lowest.createdAt" />
+							<div
+								class="value"
+								v-money-format="getInformationValues.lowest.value"
+							/>
+							<small v-date-format="getInformationValues.lowest.createdAt" />
 						</b-col>
 					</b-row>
 					<div class="not-found-message" v-else>
@@ -43,16 +55,16 @@ export default {
 	components: {
 		Sidebar,
 	},
-	created() {
-		this.actionIndexExpenses()
+	async created() {
+		await this.actionFetchExpenses()
 	},
 	methods: {
-		...mapActions('expense', ['actionIndexExpenses']),
+		...mapActions('expense', ['actionFetchExpenses']),
 	},
 	computed: {
 		...mapGetters('expense', ['expenses']),
 
-		getValues() {
+		getInformationValues() {
 			const { expenses } = this
 
 			const values = {
@@ -89,6 +101,7 @@ export default {
 #home {
 	height: 100vh;
 	.home-box {
+		position: relative;
 		width: 100%;
 		display: flex;
 		flex-direction: column;

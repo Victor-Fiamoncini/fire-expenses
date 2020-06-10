@@ -1,10 +1,18 @@
 <template>
 	<b-row id="expense-list-item">
-		<b-col cols="3">
-			<p v-date-format="expense.createdAt" />
-		</b-col>
-		<b-col cols="7">
-			<p>{{ expense.description }}</p>
+		<b-col cols="10">
+			<div class="description">
+				<span>{{ expense.description }}</span>
+				<b-button
+					variant="primary"
+					v-if="expense.receipt"
+					@click="doOpenReceipt"
+				>
+					<font-awesome-icon icon="paperclip" />
+					Abrir comprovante
+				</b-button>
+			</div>
+			<small v-date-format="expense.createdAt" />
 		</b-col>
 		<b-col cols="2">
 			<p class="value" v-money-format="expense.value" />
@@ -16,6 +24,11 @@
 export default {
 	name: 'ExpenseListItem',
 	props: ['expense'],
+	methods: {
+		doOpenReceipt() {
+			window.open(this.expense.receipt, '_blank')
+		},
+	},
 }
 </script>
 
@@ -28,5 +41,13 @@ export default {
 	padding: 10px 4px;
 	display: flex;
 	align-items: center;
+	.description {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	small {
+		font-size: 0.875rem;
+	}
 }
 </style>
