@@ -48,6 +48,8 @@ export async function actionStoreExpense({ commit, dispatch }, payload) {
 
 export async function actionFetchExpenses({ commit }) {
 	try {
+		commit(Types.SET_LOADING)
+
 		const expenses = await firebase
 			.firestore()
 			.collection('expenses')
@@ -63,6 +65,7 @@ export async function actionFetchExpenses({ commit }) {
 			]
 		})
 
+		commit(Types.REMOVE_LOADING)
 		commit(Types.SET_EXPENSES, serializedExpenses)
 	} catch (err) {
 		alert('Erro ao obter as suas despesas')

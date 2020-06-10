@@ -56,14 +56,14 @@ export default {
 		...mapGetters('auth', ['loading']),
 	},
 	methods: {
-		...mapActions('auth', ['actionDeleteUser']),
+		...mapActions('auth', ['actionDeleteAccount']),
 
 		doCloseModal() {
 			this.show = false
 		},
 		async doDeleteAccount() {
-			if (await this.actionDeleteUser()) {
-				this.show = false
+			if (await this.actionDeleteAccount()) {
+				this.doCloseModal()
 			}
 		},
 	},

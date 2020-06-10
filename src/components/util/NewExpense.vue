@@ -94,7 +94,7 @@ export default {
 		},
 		async doStoreExpense() {
 			if (await this.actionStoreExpense(this.form)) {
-				this.show = false
+				this.doCloseModal()
 			}
 		},
 	},

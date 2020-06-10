@@ -9,7 +9,7 @@
 
 body {
 	line-height: 1.4;
-	padding-right: 0 !important;
+	padding-right: 0;
 }
 
 body::-webkit-scrollbar {
@@ -29,24 +29,20 @@ body::-webkit-scrollbar-thumb {
 
 input,
 button,
+label,
 textarea {
 	border-radius: 0;
 	box-shadow: none !important;
-	border-color: $featured !important;
+	border-color: $featured;
 }
 
 input {
 	&[type=file] {
 		cursor: pointer;
-		&:focus {
-			border-color: $featured !important;
-		}
 	}
-}
-
-label {
-	box-shadow: none !important;
-	border-color: $featured !important;
+	&:focus {
+		border-color: $darker;
+	}
 }
 
 .btn,
@@ -54,11 +50,7 @@ label {
 .alert,
 .form-control,
 .modal-content {
-	border-radius: 0 !important;
-}
-
-.focus {
-	border-color: $featured !important;
+	border-radius: 0;
 }
 
 .btn-primary {
@@ -70,11 +62,11 @@ label {
 }
 
 .btn-outline-primary {
-  border-color: $featured !important;
-  color: $featured !important;
+  border-color: $featured;
+  color: $featured;
   &:hover {
-    color: $darker !important;
-    background-color: $featured !important;
+    color: $darker;
+    background-color: $featured;
   }
 }
 
@@ -95,4 +87,13 @@ label {
 	color: $featured;
 	font-size: 0.75rem;
 	transition: all .3s;
+}
+
+.screen-loading {
+	height: 100vh;
+	font-size: 62px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: $featured;
 }

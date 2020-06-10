@@ -3,7 +3,7 @@
 		<b-row>
 			<Sidebar />
 			<b-col>
-				<div id="home">
+				<div id="home" v-if="!loading">
 					<b-row v-if="getInformationValues.length">
 						<b-col cols="6" class="home-box">
 							<small>Você gastou</small>
@@ -41,6 +41,9 @@
 						<p>Não há despesas cadastradas</p>
 					</div>
 				</div>
+				<div class="screen-loading" v-else>
+					<font-awesome-icon icon="spinner" class="fa-spin" size="lg" />
+				</div>
 			</b-col>
 		</b-row>
 	</b-container>
@@ -62,7 +65,7 @@ export default {
 		...mapActions('expense', ['actionFetchExpenses']),
 	},
 	computed: {
-		...mapGetters('expense', ['expenses']),
+		...mapGetters('expense', ['expenses', 'loading']),
 
 		getInformationValues() {
 			const { expenses } = this

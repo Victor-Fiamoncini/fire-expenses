@@ -2,7 +2,7 @@
 	<b-container fluid>
 		<b-row>
 			<Sidebar />
-			<b-col id="expesne-list">
+			<b-col id="expesne-list" v-if="!loading">
 				<b-container v-if="expenses.length > 0">
 					<ExpenseListItem
 						v-for="expense in expenses"
@@ -12,6 +12,11 @@
 				</b-container>
 				<div class="not-found-message" v-else>
 					<p>Não há despesas cadastradas</p>
+				</div>
+			</b-col>
+			<b-col v-else>
+				<div class="screen-loading">
+					<font-awesome-icon icon="spinner" class="fa-spin" size="lg" />
 				</div>
 			</b-col>
 		</b-row>
@@ -36,7 +41,7 @@ export default {
 		...mapActions('expense', ['actionFetchExpenses']),
 	},
 	computed: {
-		...mapGetters('expense', ['expenses']),
+		...mapGetters('expense', ['expenses', 'loading']),
 	},
 }
 </script>

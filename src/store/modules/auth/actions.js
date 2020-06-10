@@ -48,20 +48,18 @@ export async function actionRegister({ commit, dispatch }, payload) {
 	}
 }
 
-export async function actionDeleteUser({ commit, dispatch }) {
+export async function actionDeleteAccount({ commit, dispatch }) {
 	try {
 		commit(Types.SET_LOADING)
 		await firebase.auth().currentUser.delete()
 		commit(Types.REMOVE_LOADING)
 
 		dispatch('actionUnsetSession')
-		alert('Usuário excluído com sucesso')
+		alert('Conta excluída com sucesso')
 
 		router.push({ name: 'Logon' })
 	} catch (err) {
-		alert(
-			'Erro ao excluir seu usuário, tente mais tarde ou faça login novamente'
-		)
+		alert('Erro ao excluir sua conta, tente mais tarde ou faça login novamente')
 	}
 }
 
