@@ -1,5 +1,5 @@
 <template>
-	<b-col cols="2" class="navigation-sidebar pt-3 pl-3 pr-0">
+	<b-col xl="2" lg="12" class="navigation-sidebar pt-3 pl-3 pr-0">
 		<h1>Fire Expenses <font-awesome-icon icon="dollar-sign" /></h1>
 		<b-nav vertical>
 			<router-link
@@ -68,26 +68,45 @@ export default {
 	height: 100vh;
 	background: $dark-low;
 	position: relative;
+	@include small-desktop {
+		padding: 20px 10px !important;
+		text-align: center;
+		height: 100%;
+	}
 	h1 {
 		font-size: 1.75rem;
 		margin: 0 0 20px;
+		@include small-desktop {
+			font-size: 1.5rem;
+		}
 		> svg {
 			color: $featured;
 		}
 	}
 	.nav {
 		margin-left: -15px;
-		button {
+		@include small-desktop {
+			flex-wrap: wrap;
+			justify-content: center;
+			flex-direction: row !important;
 		}
 		.nav-item.logout {
 			position: absolute;
 			bottom: 20px;
 			width: 100%;
+			@include small-desktop {
+				width: auto;
+				position: inherit;
+			}
 		}
 		.nav-link {
 			color: $light;
 			font-weight: 600;
 			transition: all 0.3s;
+			@include small-desktop {
+				position: inherit;
+				font-size: 0.875rem;
+			}
 			&.active {
 				color: $featured;
 				background: transparent;

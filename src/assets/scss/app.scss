@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 @import 'variables';
+@import 'mixins';
 
 * {
 	box-sizing: border-box;
@@ -95,7 +96,7 @@ button {
 
 .screen-loading {
 	height: 100vh;
-	font-size: 62px;
+	font-size: 70px;
 	display: flex;
 	align-items: center;
 	justify-content: center;

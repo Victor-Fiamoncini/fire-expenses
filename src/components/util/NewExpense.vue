@@ -75,9 +75,9 @@ export default {
 	data: () => ({
 		show: false,
 		form: {
-			description: 'Super mercado 20/05',
+			description: '',
 			receipt: null,
-			value: 130.0,
+			value: '',
 		},
 	}),
 	computed: {

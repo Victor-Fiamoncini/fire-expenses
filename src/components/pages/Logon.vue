@@ -53,8 +53,8 @@ export default {
 	name: 'Logon',
 	data: () => ({
 		form: {
-			email: 'victor@mail.com',
-			password: 'adminadmin',
+			email: '',
+			password: '',
 		},
 	}),
 	computed: {

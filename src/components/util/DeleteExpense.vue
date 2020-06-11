@@ -1,9 +1,9 @@
 <template>
 	<b-modal
-		:id="`delete-expense-${expenseId}`"
-		size="md"
-		title="Excluír despesa"
 		hide-footer
+		size="md"
+		:id="`delete-expense-${expenseId}`"
+		title="Excluir despesa"
 		v-model="show"
 	>
 		<b-row>

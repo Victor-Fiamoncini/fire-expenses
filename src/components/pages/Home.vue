@@ -5,7 +5,7 @@
 			<b-col>
 				<div id="home" v-if="!loading">
 					<b-row v-if="getInformationValues.length">
-						<b-col cols="6" class="home-box">
+						<b-col xl="6" lg="12" class="home-box">
 							<small>Você gastou</small>
 							<div
 								class="value"
@@ -13,14 +13,14 @@
 							/>
 							<small>em {{ getInformationValues.length }} compras</small>
 						</b-col>
-						<b-col cols="6" class="home-box">
+						<b-col xl="6" lg="12" class="home-box">
 							<small>A média de gastos é de</small>
 							<div
 								class="value"
 								v-money-format="getInformationValues.average"
 							/>
 						</b-col>
-						<b-col cols="6" class="home-box">
+						<b-col xl="6" lg="12" class="home-box">
 							<small>A maior despesa foi de</small>
 							<div
 								class="value"
@@ -28,7 +28,7 @@
 							/>
 							<small v-date-format="getInformationValues.biggest.createdAt" />
 						</b-col>
-						<b-col cols="6" class="home-box">
+						<b-col xl="6" lg="12" class="home-box">
 							<small>A menor despesa foi de</small>
 							<div
 								class="value"
@@ -103,6 +103,9 @@ export default {
 
 #home {
 	height: 100vh;
+	@include small-desktop {
+		height: 100%;
+	}
 	.home-box {
 		position: relative;
 		width: 100%;
@@ -112,6 +115,12 @@ export default {
 		justify-content: center;
 		font-size: 2rem;
 		height: 50vh;
+		@include small-desktop {
+			height: 140px;
+			&:not(:last-of-type) {
+				border-bottom: 1px solid $dark-low;
+			}
+		}
 		.value {
 			color: $featured;
 		}

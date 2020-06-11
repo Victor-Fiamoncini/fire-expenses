@@ -62,9 +62,9 @@ export default {
 	name: 'Register',
 	data: () => ({
 		form: {
-			name: 'Victor Fiamoncini',
-			email: 'victor@mail.com',
-			password: 'adminadmin',
+			name: '',
+			email: '',
+			password: '',
 		},
 	}),
 	computed: {

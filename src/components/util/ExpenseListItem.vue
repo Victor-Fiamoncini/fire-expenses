@@ -12,6 +12,7 @@
 			</b-col>
 			<b-col cols="2" class="text-right">
 				<b-button
+					block
 					variant="primary"
 					v-if="expense.receipt"
 					@click="doOpenReceipt"
@@ -22,6 +23,7 @@
 			</b-col>
 			<b-col cols="2" class="text-right">
 				<b-button
+					block
 					outline
 					v-b-modal="`delete-expense-${expense.id}`"
 					variant="danger"
