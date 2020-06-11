@@ -14,7 +14,7 @@
 					<p>Não há despesas cadastradas</p>
 				</div>
 			</b-col>
-			<b-col v-else>
+			<b-col v-else-if="loading">
 				<div class="screen-loading">
 					<font-awesome-icon icon="spinner" class="fa-spin" size="lg" />
 				</div>

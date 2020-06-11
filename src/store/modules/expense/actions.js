@@ -37,8 +37,6 @@ export async function actionStoreExpense({ commit, dispatch }, payload) {
 		commit(Types.REMOVE_LOADING)
 
 		dispatch('actionFetchExpenses')
-		alert('Despesa cadastrada com sucesso')
-
 		return true
 	} catch (err) {
 		commit(Types.REMOVE_LOADING)
@@ -69,5 +67,18 @@ export async function actionFetchExpenses({ commit }) {
 		commit(Types.SET_EXPENSES, serializedExpenses)
 	} catch (err) {
 		alert('Erro ao obter as suas despesas')
+	}
+}
+
+export async function actionDeleteExpense({ commit, dispatch }, payload) {
+	try {
+		commit(Types.SET_LOADING)
+		await firebase.firestore().collection('expenses').doc(payload.id).delete()
+		commit(Types.REMOVE_LOADING)
+
+		dispatch('actionFetchExpenses')
+		return true
+	} catch (err) {
+		alert('Erro ao excluír essa despesa, tente novamente')
 	}
 }

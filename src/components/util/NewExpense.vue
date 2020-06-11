@@ -95,6 +95,10 @@ export default {
 		async doStoreExpense() {
 			if (await this.actionStoreExpense(this.form)) {
 				this.doCloseModal()
+
+				this.form.description = 'Super mercado 20/05'
+				this.form.receipt = null
+				this.form.value = 130.0
 			}
 		},
 	},
