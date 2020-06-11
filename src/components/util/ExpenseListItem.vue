@@ -55,7 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/app';
+@import '@/assets/scss/app';
 
 #expense-list-item {
 	border-bottom: 1px solid $featured;

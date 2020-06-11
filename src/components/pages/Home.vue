@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import Sidebar from '../layout/Sidebar'
+import Sidebar from '@/components/layout/Sidebar'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -99,7 +99,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/app.scss';
+@import '@/assets/scss/app.scss';
 
 #home {
 	height: 100vh;

@@ -3,6 +3,7 @@
 		<b-row>
 			<Sidebar />
 			<b-col id="expesne-list" v-if="!loading">
+				<DateNavigation />
 				<b-container v-if="expenses.length > 0">
 					<ExpenseListItem
 						v-for="expense in expenses"
@@ -24,13 +25,15 @@
 </template>
 
 <script>
-import ExpenseListItem from '../util/ExpenseListItem'
-import Sidebar from '../layout/Sidebar'
+import DateNavigation from '@/components/util/DateNavigation'
+import ExpenseListItem from '@/components/util/ExpenseListItem'
+import Sidebar from '@/components/layout/Sidebar'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
 	name: 'ExpenseList',
 	components: {
+		DateNavigation,
 		ExpenseListItem,
 		Sidebar,
 	},
@@ -47,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/app';
+@import '@/assets/scss/app';
 
 #expesne-list {
 	padding: 0;
@@ -80,7 +83,6 @@ export default {
 	}
 	.container {
 		overflow: hidden auto;
-		height: 100vh;
 		padding-top: 15px;
 		padding-bottom: 15px;
 		font-size: 1rem;

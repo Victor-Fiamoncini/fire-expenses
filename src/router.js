@@ -45,9 +45,7 @@ const router = new Router({
 })
 
 window.popStateDetected = false
-window.addEventListener('popstate', () => {
-	window.popStateDetected = true
-})
+window.addEventListener('popstate', () => (window.popStateDetected = true))
 
 router.beforeEach((to, from, next) => {
 	document.title = `${to.meta.title} - Fire Expenses`

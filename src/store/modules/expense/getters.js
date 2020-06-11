@@ -1,5 +1,5 @@
 export default {
-	expense: state => state.expense,
 	expenses: state => state.expenses,
+	dates: state => state.dates,
 	loading: state => state.loading,
 }
