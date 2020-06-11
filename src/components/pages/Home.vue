@@ -116,6 +116,7 @@ export default {
 		font-size: 2rem;
 		height: 50vh;
 		@include small-desktop {
+			font-size: 1.75rem;
 			height: 140px;
 			&:not(:last-of-type) {
 				border-bottom: 1px solid $dark-low;
@@ -126,6 +127,9 @@ export default {
 		}
 		small {
 			font-size: 1.25rem;
+			@include small-desktop {
+				font-size: 1rem;
+			}
 		}
 	}
 }

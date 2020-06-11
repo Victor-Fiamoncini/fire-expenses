@@ -9,7 +9,11 @@
 		>
 			<b-form @submit.prevent="doStoreExpense">
 				<b-row>
-					<b-form-group class="col-8" label="Descrição" label-for="description">
+					<b-form-group
+						class="col-xl-8 col-lg-12"
+						label="Descrição"
+						label-for="description"
+					>
 						<b-form-input
 							type="text"
 							id="description"
@@ -18,7 +22,11 @@
 							v-model="form.description"
 						/>
 					</b-form-group>
-					<b-form-group class="col-4" label="Valor" label-for="value">
+					<b-form-group
+						class="col-xl-4 col-lg-12"
+						label="Valor"
+						label-for="value"
+					>
 						<b-form-input
 							type="text"
 							id="value"
@@ -27,8 +35,9 @@
 							v-model="form.value"
 						/>
 					</b-form-group>
-					<b-form-group class="col-12 text-center">
+					<b-form-group class="col-12" label="Recibo" label-for="receipt">
 						<b-form-file
+							id="receipt"
 							type="file"
 							accept=".jpeg, .png, .pdf"
 							placeholder="Adicionar recido"

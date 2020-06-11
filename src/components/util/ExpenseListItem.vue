@@ -1,16 +1,16 @@
 <template>
 	<div>
 		<b-row id="expense-list-item">
-			<b-col cols="6">
+			<b-col sm="6">
 				<div class="description">
 					<span>{{ expense.description }}</span>
 					<small v-date-format="expense.createdAt" />
 				</div>
 			</b-col>
-			<b-col cols="2">
+			<b-col sm="2">
 				<small class="value" v-money-format="expense.value" />
 			</b-col>
-			<b-col cols="2" class="text-right">
+			<b-col sm="2" class="text-right">
 				<b-button
 					block
 					variant="primary"
@@ -21,7 +21,7 @@
 					Ver recibo
 				</b-button>
 			</b-col>
-			<b-col cols="2" class="text-right">
+			<b-col sm="2" class="text-right">
 				<b-button
 					block
 					outline
@@ -63,20 +63,44 @@ export default {
 	padding: 10px 4px;
 	display: flex;
 	align-items: center;
+	@include small-desktop {
+		width: 100%;
+	}
+	button {
+		@include small-desktop {
+			font-size: 0.875rem;
+		}
+	}
 	.description {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: flex-start;
+		@include smartphone {
+			align-items: center;
+		}
 		span {
 			display: inline-block;
 			color: $featured;
 			font-size: 1.125rem;
 			margin: 0 0 6px;
+			@include small-desktop {
+				font-size: 1rem;
+			}
+		}
+	}
+	.value {
+		@include smartphone {
+			display: block;
+			text-align: center;
+			margin: 10px 0;
 		}
 	}
 	small {
 		font-size: 1rem;
+		@include small-desktop {
+			font-size: 0.875rem;
+		}
 	}
 }
 </style>

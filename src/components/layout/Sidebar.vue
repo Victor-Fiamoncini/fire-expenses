@@ -69,9 +69,10 @@ export default {
 	background: $dark-low;
 	position: relative;
 	@include small-desktop {
-		padding: 20px 10px !important;
+		padding: 20px 2px !important;
 		text-align: center;
 		height: 100%;
+		width: 100%;
 	}
 	h1 {
 		font-size: 1.75rem;
@@ -89,6 +90,7 @@ export default {
 			flex-wrap: wrap;
 			justify-content: center;
 			flex-direction: row !important;
+			margin: 0;
 		}
 		.nav-item.logout {
 			position: absolute;

@@ -83,6 +83,9 @@ button {
 	p {
 		font-size: 2rem;
 		color: $featured;
+		@include tablet {
+			text-align: center;
+		}
 	}
 }
 

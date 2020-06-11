@@ -51,6 +51,9 @@ export default {
 
 #expesne-list {
 	padding: 0;
+	@include small-desktop {
+		padding: 2px !important;
+	}
 	.months-navigation {
 		display: flex;
 		width: 100%;
@@ -69,6 +72,9 @@ export default {
 			.value-label {
 				color: $dark-medium;
 				font-size: 1rem;
+				@include small-desktop {
+					font-size: 0.875rem;
+				}
 			}
 		}
 	}
@@ -78,6 +84,13 @@ export default {
 		padding-top: 15px;
 		padding-bottom: 15px;
 		font-size: 1rem;
+		@include small-desktop {
+			margin: 0 !important;
+			height: 100%;
+			max-width: 100%;
+			padding: 10px 0;
+			font-size: 0.875rem;
+		}
 		#expenseListItem:last-of-type {
 			margin-bottom: 0;
 		}
