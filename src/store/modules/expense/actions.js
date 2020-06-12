@@ -23,28 +23,32 @@ export async function actionStoreExpense({ commit, dispatch }, payload) {
 			url = await file.ref.getDownloadURL()
 		}
 
-		const newExpense = {
+		await firebase.firestore().collection('expenses').add({
 			createdAt: new Date().getTime(),
 			description,
 			receipt: url,
 			user: uid.getUid(),
 			value,
-		}
+		})
 
-		await firebase.firestore().collection('expenses').add(newExpense)
-
-		commit(Types.SET_EXPENSE, newExpense)
 		commit(Types.REMOVE_LOADING)
-
 		dispatch('actionFetchExpenses')
+
 		return true
 	} catch (err) {
 		commit(Types.REMOVE_LOADING)
-		alert('Erro ao cadastrar despesa, tente novamente')
+		dispatch(
+			'notification/actionStoreNotification',
+			{
+				message: 'Erro ao cadastrar despesa, tente novamente',
+				type: 'danger',
+			},
+			{ root: true }
+		)
 	}
 }
 
-export async function actionFetchExpenses({ commit }) {
+export async function actionFetchExpenses({ commit, dispatch }) {
 	try {
 		commit(Types.SET_LOADING)
 
@@ -66,7 +70,15 @@ export async function actionFetchExpenses({ commit }) {
 		commit(Types.REMOVE_LOADING)
 		commit(Types.SET_EXPENSES, serializedExpenses)
 	} catch (err) {
-		alert('Erro ao obter as suas despesas')
+		commit(Types.REMOVE_LOADING)
+		dispatch(
+			'notification/actionStoreNotification',
+			{
+				message: 'Erro ao obter as suas despesas',
+				type: 'danger',
+			},
+			{ root: true }
+		)
 	}
 }
 
@@ -79,6 +91,14 @@ export async function actionDeleteExpense({ commit, dispatch }, payload) {
 		dispatch('actionFetchExpenses')
 		return true
 	} catch (err) {
-		alert('Erro ao excluír essa despesa, tente novamente')
+		commit(Types.REMOVE_LOADING)
+		dispatch(
+			'notification/actionStoreNotification',
+			{
+				message: 'Erro ao excluír essa despesa, tente novamente',
+				type: 'danger',
+			},
+			{ root: true }
+		)
 	}
 }

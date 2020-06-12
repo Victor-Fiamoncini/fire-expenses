@@ -19,8 +19,16 @@ export async function actionLogon({ commit, dispatch }, payload) {
 
 		router.push({ name: 'Home' })
 	} catch (err) {
+		commit(Types.REMOVE_LOADING)
 		dispatch('actionUnsetSession')
-		alert('Credenciais inválidas')
+		dispatch(
+			'notification/actionStoreNotification',
+			{
+				message: 'Credenciais inválidas',
+				type: 'danger',
+			},
+			{ root: true }
+		)
 	}
 }
 
@@ -39,12 +47,27 @@ export async function actionRegister({ commit, dispatch }, payload) {
 		dispatch('actionSetUid', user.uid)
 		commit(Types.REMOVE_LOADING)
 
-		alert(`Seja bem vindo(a) ${name}, seu cadastro foi concluído!`)
+		dispatch(
+			'notification/actionStoreNotification',
+			{
+				message: `Seja bem vindo(a) ${name}, seu cadastro foi concluído!`,
+				type: 'success',
+			},
+			{ root: true }
+		)
 
 		router.push({ name: 'Home' })
 	} catch (err) {
+		commit(Types.REMOVE_LOADING)
 		dispatch('actionUnsetSession')
-		alert('Credenciais inválidas')
+		dispatch(
+			'notification/actionStoreNotification',
+			{
+				message: 'Credenciais inválidas',
+				type: 'danger',
+			},
+			{ root: true }
+		)
 	}
 }
 
@@ -52,14 +75,31 @@ export async function actionDeleteAccount({ commit, dispatch }) {
 	try {
 		commit(Types.SET_LOADING)
 		await firebase.auth().currentUser.delete()
-		commit(Types.REMOVE_LOADING)
 
 		dispatch('actionUnsetSession')
-		alert('Conta excluída com sucesso')
+		dispatch(
+			'notification/actionStoreNotification',
+			{
+				message: 'Conta excluída com sucesso',
+				type: 'success',
+			},
+			{ root: true }
+		)
 
 		router.push({ name: 'Logon' })
 	} catch (err) {
-		alert('Erro ao excluir sua conta, tente mais tarde ou faça login novamente')
+		console.log(err.message)
+
+		commit(Types.REMOVE_LOADING)
+		dispatch(
+			'notification/actionStoreNotification',
+			{
+				message:
+					'Erro ao excluir sua conta, tente mais tarde ou faça login novamente',
+				type: 'danger',
+			},
+			{ root: true }
+		)
 	}
 }
 
@@ -81,7 +121,6 @@ export async function actionUnsetSession({ commit }) {
 	uid.destroyUid()
 
 	commit(Types.REMOVE_UID)
-	commit(Types.REMOVE_USER)
 	commit(Types.REMOVE_LOADING)
 
 	await firebase.auth().signOut()
