@@ -19,7 +19,7 @@
     "bootstrap-vue": "^2.15.0",
     "core-js": "^3.6.5",
     "firebase": "^7.15.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.2",
     "uuid": "^8.1.0",
     "vue": "^2.6.11",
     "vue-router": "^3.3.2",
